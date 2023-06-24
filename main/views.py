@@ -1,3 +1,6 @@
 from django.shortcuts import render
 
-# Create your views here.
+
+def join_discord(request):
+    template_name = 'main/join_discord.html'
+    return render(request, template_name)
