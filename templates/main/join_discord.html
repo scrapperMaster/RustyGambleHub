@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="{% static 'main/img/favicon.png'%}" sizes="16x16">
     <title>RustyGamble</title>
 </head>
 <body>
@@ -24,13 +25,27 @@
             </p>
             
         <div class="discord-links">
-            <a class="discord-link" href="#" title="RustyGamble discord">
+            <a class="discord-link" href="https://discord.com" title="RustyGamble discord" target="_blank">
                 <button class="discord-bt">
-                    DISCORD
+                    <img class="discord-bt-img" src="{% static 'main/img/discord-button.png'%}">
                 </button>
             </a>
         </div>
     </main>
+    <div class="area" >
+        <ul class="circles">
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+        </ul>
+</div >
     <script src="{%static 'main/js/animation.js'%}"></script>
 </body>
 </html>
