@@ -12,6 +12,5 @@ function createLight() {
 setInterval(() => {
     const light = createLight();
     document.body.appendChild(light);
-    animateLight(light);
-}, 500);
+}, 1500);
   
