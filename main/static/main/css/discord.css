@@ -17,6 +17,8 @@ main{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    overflow-x: hidden;
+    overflow-y: hidden;
 }
 
 .logo{
@@ -29,10 +31,6 @@ main{
     background-color: transparent;
     object-fit: contain;
 
-}
-
-.logo:hover{
-    transform: scale(1.05);
 }
 
 .logo-img{
@@ -62,6 +60,7 @@ p{
     top: 0;
     z-index: -19;
     overflow-x: hidden;
+    overflow-y: hidden;
 }
 
 .circles{
@@ -234,23 +233,10 @@ span{
     -webkit-appearance: button;
     -moz-appearance: none;
     appearance: none;
-    .discord-bt{
-        width: 100%;
-        height: 100%;
     
-        font-size: 3rem;
-        background-color: #ffa31a;
-        border:none;
-        border-radius: 15px;
-        transition: all 0.15s;
-        -webkit-appearance: button;
-        -moz-appearance: none;
-        appearance: none;
-        
-        /* Add these properties */
-        -webkit-tap-highlight-color: transparent;
-        -webkit-touch-callout: none;
-    }
+    /* Add these properties */
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
 }
 
 .discord-bt:hover{
@@ -319,6 +305,12 @@ to {
     }
 }
 
+@media (max-width:555px) {
+    .discord-links{
+        width: 250px;
+        height: 100px;
+    }
+}
 @media (max-width:450px) {
     .logo, .discord-links{
         width: 250px;
