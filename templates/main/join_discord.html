@@ -1,7 +1,7 @@
+{% extends 'main/base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
+
+{% block assets %}
     <meta charset="UTF-8">
     <meta name="keywords" content="rustygamble, rusty gamble, coinflip, rust, jackpot, online gaming, gambling, betting, multiplayer games, game platform, gaming community, rust skins, virtual items, winning chances, gaming experience, fair play, gaming tournaments, esports" />
     <meta name="description" content="Discover RustyGamble - the ultimate service for coin flipping and more. Join us soon for an exciting experience featuring Rust, jackpots, and more. Stay tuned for updates and visit our Discord community for additional information." />
@@ -12,22 +12,25 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="{% static 'main/img/favicon.png'%}" sizes="16x16">
+{% endblock %}
 
-    <title>RustyGamble</title>
-</head>
-<body>
+{% block title %}
+    Jopa
+{% endblock %}
 
-    <main>
+
+{% block content %}
+     <main>
         <div class="logo">
             <img class="logo-img" alt="RustyGamble" src="{% static 'main/img/logo.gif'%}">
         </div>
         <div class="description">
             <p class="first-line"><span>Cum</span>ming <span>soon</span></p>
-            <p class="second-line">For <span>more</span> information, <span>check out</span> our 
-                
+            <p class="second-line">For <span>more</span> information, <span>check out</span> our
+
             </div>
             </p>
-            
+
         <div class="discord-links">
             <a class="discord-link" href="https://discord.gg/2J4Ewwug9c" title="RustyGamble discord" target="_blank">
                 <button class="discord-bt">
@@ -51,5 +54,4 @@
         </ul>
 </div >
     <script src="{%static 'main/js/animation.js'%}"></script>
-</body>
-</html>
+{% endblock %}

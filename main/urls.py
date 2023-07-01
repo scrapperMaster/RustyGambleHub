@@ -5,7 +5,8 @@ from RustyGambleHub import settings
 from main import views
 
 urlpatterns = [
-    path('', views.join_discord)
+    path('', views.join_discord),
+    path('visit_ds', views.join_discord),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
