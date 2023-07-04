@@ -1,0 +1,43 @@
+.container{
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .main-content {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 100px;
+  }
+
+  .drop-card {
+    width: 66.66%; /* 2/3 of the available width */
+    height: 200px;
+    background-color: #f1f1f1;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .timer {
+    font-size: 24px;
+  }
+  
+  .games{
+    width: 66.6%;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .small-card {
+    width: 40%;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 2px;
+    background-color: #f1f1f1;
+    margin-top: 10px;
+  }
