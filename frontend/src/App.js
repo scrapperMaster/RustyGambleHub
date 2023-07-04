@@ -1,11 +1,11 @@
-import AnimeCard from "./AnimeCard";
+import MainPage from "./MainPage";
+import { useEffect, useState } from "react";
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <AnimeCard title="Naruto" year="2002" genre="Comedy"></AnimeCard>
-      <AnimeCard title="Berserk" year="1996" genre="Dramm"></AnimeCard>
+      <MainPage></MainPage>
     </div>
   );
 }
