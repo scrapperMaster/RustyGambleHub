@@ -11,7 +11,7 @@ const Chat = () => {
 
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth < 1115) {
+      if (window.innerWidth < 0) {
         setIsChatVisible(false);
         setIsButtonClose(false);
       } else {
