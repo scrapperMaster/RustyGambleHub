@@ -4,13 +4,13 @@ const Header = () => {
     return(
         <header>
         <div className="logo">
-            <img src="your-logo.png" alt="Logo"/>
+            <a href="#" title="RustyGamble"><img src="/logo.gif" alt="Logo"/></a>
         </div>
         <nav>
             <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Services</a></li>
+                <li><a href="#">Coin<span className="coloring-span">Flip</span></a></li>
+                <li><a href="#">Jack<span className="coloring-span">Pot</span></a></li>
+                <li><a href="#">FAQ</a></li>
                 <li><a href="#">Contact</a></li>
             </ul>
         </nav>
