@@ -85,6 +85,7 @@
     border-radius: 2px;
     background-color: #f1f1f1;
     margin-top: 10px;
+    font-weight: bold;
 
     position: relative; /* Add this line to make the position of .drop-card-bg-img relative */
     border-radius: 18px;
@@ -92,3 +93,47 @@
     background-color: var(--color_1);
     z-index: -2;
   }
+
+  @media only screen and (max-width: 1115px) {
+    .void-div{
+      display: none;
+    }
+  }
+
+  @media only screen and (max-width: 970px) {
+    .games{
+      justify-content: center;
+    }
+    .small-card {
+      height: 118px;
+    }
+  }
+  
+  @media only screen and (max-width: 650px) {
+    .card-title{
+      font-size: 2.8rem;
+    }
+
+    .card-center{
+      font-size: 2rem;
+    }
+
+    .timer{
+      font-size: 2rem;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+  .card-title{
+    font-size: 2.1rem;
+  }
+
+  .card-center{
+    font-size: 1.5rem;
+  }
+
+  .timer{
+    font-size: 1.5rem;
+  }
+}
+

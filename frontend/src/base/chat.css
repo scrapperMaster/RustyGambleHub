@@ -5,6 +5,11 @@
     background-color: #0f0f0f;
     position: fixed;
     background-color: rgb(16, 16, 16);
+    transition: transform 0.3s ease-in-out; /* Added transition property */
+  }
+  
+  .chat-hidden {
+    transform: translateX(-100%); /* Hide the chat by moving it to the left */
   }
 
   .chat-title{
@@ -19,6 +24,26 @@
     border: 1px solid rgb(37, 37, 37);
     box-shadow: 0px 2px 10px black;
   }
+
+  .chat-close-bt{
+    position: absolute;
+    top: 93px;
+    right: 0px;
+    transform: rotate(180deg);
+    transition: all 0.3s;
+  }
+
+  .chat-open-bt{
+    right: -65px;
+    transform: rotate(0deg);
+  }
+
+  .chat-bt{
+    background: none;
+    border: none;
+    color: white;
+  }
+
 
   .messages-container {
     height: 60vh; /* Set a fixed height for the container */
@@ -46,6 +71,7 @@
   .avatar{
     border-radius: 100%;
     position: relative;
+    width: 60px;
   }
 
   .avatar-img{  
@@ -79,6 +105,11 @@
   
   .message-content {
     color: #ffffff;
+    width: 282px;
+  }
+
+  .status-icons{
+    width: 60px;
   }
   
   .user-input {
