@@ -13,8 +13,6 @@ const App = () => {
   return (
     <Router>
       <div className="App">
-
-          <SteamLogin/>
         <MainPage></MainPage>
       </div>
     </Router>

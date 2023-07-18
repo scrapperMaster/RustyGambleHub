@@ -32,12 +32,11 @@ const Header = () => {
             </div>
 
             {isMobile ? (
-
                 <>
-
                     <button className={`close-sidebar ${isSidebarOpen ? "" : "open-sidebar"}`} onClick={handleOpenBar}>
                         <img className="bt-burger-img"
-                             src={`${!isSidebarOpen ? "/burger-bt.png" : "/close-bt.png"}`}></img>
+                             src={`${!isSidebarOpen ? "/burger-bt.png" : "/close-bt.png"}`}>
+                         </img>
                     </button>
                     <div className={`right-sidebar ${isSidebarOpen ? "" : "close-right-sidebar"}`}>
                         <nav>
@@ -60,15 +59,10 @@ const Header = () => {
                             <a className="discord-button" href="#">
                                 Discord
                             </a>
-                            <a className="login-button" href="#">
-                                Login
-                            </a>
                             <SteamLogin/> {/* Вставляем компонент SteamLoginButton */}
                             <button className={`close-sidebar ${isSidebarOpen ? "" : "open-sidebar"}`}
                                     onClick={handleOpenBar}>
-                                {/* ... */}
                             </button>
-                            {/* ... */}
                         </div>
                     </div>
                 </>
@@ -96,13 +90,6 @@ const Header = () => {
                             Discord
                         </a>
                         <SteamLogin/> {/* Вставляем компонент SteamLoginButton */}
-                        <button
-                            className={`close-sidebar ${isSidebarOpen ? '' : 'open-sidebar'}`}
-                            onClick={handleOpenBar}
-                        >
-                            {/* ... */}
-                        </button>
-                        {/* ... */}
                     </div>
                 </>
             )}

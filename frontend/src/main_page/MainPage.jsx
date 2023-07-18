@@ -8,7 +8,6 @@ const MainPage = () =>{
     return(
         <>
             <Header></Header>
-
             <main>
                 <div className="container">
                     <Chat></Chat>

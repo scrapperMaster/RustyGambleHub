@@ -55,7 +55,7 @@ const Chat = () => {
             perferendis assumenda eligendi eius praesentium!
           </div>
           <div className="status-icons">
-            <img src="/streamer-icon.png" alt="Streamer Account" />
+            
           </div>
         </div>
         <div className="message">
