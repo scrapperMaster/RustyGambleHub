@@ -2,15 +2,21 @@ from django.urls import path, include
 from django.conf.urls.static import static
 from RustyGambleHub import settings
 from rest_framework import routers
-from .views import GenreViewSet, AnimeViewSet, CharacterViewSet
 
-router = routers.DefaultRouter()
-router.register(r'genres', GenreViewSet)
-router.register(r'anime', AnimeViewSet)
-router.register(r'characters', CharacterViewSet)
+from django.urls import path
+
+from . import views
+
+app_name = 'main'
 
 urlpatterns = [
-    path('', include(router.urls)),
-]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+                  path('get_steam_auth_url/', views.get_steam_auth_url, name='get_steam_auth_url'),
+                  path('login/', views.login, name='login'),
+                  path('auth/login/steam/', views.login_done, name='login_done'),
+                  path('logout/', views.logout, name='logout'),
+                  path('protected/', views.protected, name='protected'),
+                  path('error/', views.error, name='error'),
+                  path('user_data/', views.get_user_data, name='get_user_data'),
+              ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
