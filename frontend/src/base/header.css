@@ -18,6 +18,10 @@ header {
     height: 100%;
     text-align: center;
   }
+
+  .logo:hover{
+    cursor: pointer;
+  }
   
   .logo img {
     width: 100%;
@@ -46,6 +50,7 @@ header {
   }
 
   nav ul li a:hover{
+    cursor: pointer;
     background-color: black;
     text-shadow: 0px 0px 10px var(--color_1);
   }
@@ -113,8 +118,6 @@ header {
   }
 
 @media (max-width: 1115px) {
-
-
   .right-sidebar{
     position: absolute;
     top: 0;

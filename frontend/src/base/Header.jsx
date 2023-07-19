@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import SteamLogin from "../SteamLoginButton";
 
-const Header = () => {
+const Header = ({ onContentChange }) => {
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
@@ -26,7 +26,7 @@ const Header = () => {
     return (
         <header>
             <div className="logo">
-                <a href="#" title="RustyGamble">
+                <a onClick={() => onContentChange("maincontent")} title="RustyGamble" >
                     <img src="/logo.png" alt="Logo"/>
                 </a>
             </div>
@@ -42,7 +42,9 @@ const Header = () => {
                         <nav>
                             <ul>
                                 <li>
-                                    <a href="#">Coin<span className="coloring-span">Flip</span></a>
+                                    <a onClick={() => onContentChange("coinflip")}>
+                                        Coin<span className="coloring-span">Flip</span>
+                                    </a>
                                 </li>
                                 <li>
                                     <a href="#">Jack<span className="coloring-span">Pot</span></a>
@@ -72,7 +74,9 @@ const Header = () => {
                     <nav>
                         <ul>
                             <li>
-                                <a href="#">Coin<span className="coloring-span">Flip</span></a>
+                            <a onClick={() => onContentChange("coinflip")}>
+                                Coin<span className="coloring-span">Flip</span>
+                            </a>
                             </li>
                             <li>
                                 <a href="#">Jack<span className="coloring-span">Pot</span></a>
