@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import Chat from "../base/Chat";
 import Header from "../base/Header";
 import MainContent from "../MainContent";
-import CoinFlip from "../CoinFlip";
+import CoinFlip from "../coinflip/CoinFlip";
 import './main_page.css';
 
 const MainPage = () =>{
