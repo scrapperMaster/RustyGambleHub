@@ -1,12 +1,24 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import Chat from "../base/Chat";
 import Header from "../base/Header";
-import MainContent from "../MainContent";
+import MainContent from "./MainContent";
 import CoinFlip from "../coinflip/CoinFlip";
 import './main_page.css';
 
 const MainPage = () =>{
     const [selectedContent, setSelectedContent] = useState("maincontent");
+
+    useEffect(() => {
+        const storedContent = localStorage.getItem('selectedContent');
+        if (storedContent) {
+          setSelectedContent(storedContent);
+        }
+      }, []);
+    
+      // Save the selected content to local storage whenever it changes
+      useEffect(() => {
+        localStorage.setItem('selectedContent', selectedContent);
+      }, [selectedContent]);
 
     const handleContentChange = (content) =>{
         setSelectedContent(content);
@@ -18,11 +30,8 @@ const MainPage = () =>{
             <main>
                 <div className="container">
                     <Chat></Chat>
-                    <div className="void-div"></div>
-                    <div class="main-content">
-                        {selectedContent ==="coinflip" && <CoinFlip></CoinFlip>}
-                        {selectedContent ==="maincontent" && <MainContent></MainContent>}
-                    </div>
+                    {selectedContent ==="coinflip" && <CoinFlip></CoinFlip>}
+                    {selectedContent ==="maincontent" && <MainContent></MainContent>}
                 </div>
             </main>
 

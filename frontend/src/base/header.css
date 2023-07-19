@@ -57,6 +57,7 @@ header {
 
   .coloring-span{
     color: var(--color_1);
+    text-shadow: 0px 0px 20px var(--color_1);
   }
 
   .buttons{

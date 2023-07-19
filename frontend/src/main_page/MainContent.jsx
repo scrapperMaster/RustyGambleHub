@@ -1,9 +1,10 @@
 import React from "react";
-import DropCard from "./main_page/DropCard";
+import DropCard from "./DropCard";
+import './main-content.css';
 
 const MainContent = () => {
     return(
-        <>
+        <div className="main-content">
             <DropCard></DropCard>
             <div className="games">
                 <div className="small-card">
@@ -19,7 +20,7 @@ const MainContent = () => {
                     </div>
                 </div>
             </div>            
-        </>
+        </div>
     );
 }
 

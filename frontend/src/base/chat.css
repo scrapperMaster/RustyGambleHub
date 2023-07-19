@@ -12,6 +12,16 @@
     transform: translateX(-100%); /* Hide the chat by moving it to the left */
   }
 
+  .void-div{
+    width: 400px;
+    z-index: -99;
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .void-div-hidden{
+    display: none;
+  }
+
   .chat-title{
     height: 60px;
     display: flex;
@@ -151,6 +161,12 @@
     font-size: 1.1rem;
     font-weight: bold;
     color: #000000;
+  }
+
+  @media only screen and (max-width: 1115px) {
+    .void-div{
+      display: none;
+    }
   }
 
   @media only screen and (max-width: 400px) {

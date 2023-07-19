@@ -1,54 +1,112 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import CoinFlipGame from "./CoinFlipGame";
+import './coinflip.css'
 
-const CoinFlip = () =>{
-    return(
+const CoinFlip = () => {
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+    useEffect(() => {
+        const handleResize = () => {
+            setWindowWidth(window.innerWidth);
+        };
+        window.addEventListener('resize', handleResize);
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        }
+    }, [])
+
+    return (
         <>
-            <div className="games-information">
-                <div className="title">
-                    Current Games
-                </div>
-                <div className="info">
-                    <div className="info-element">
-                        <div className="info-header">
-                            1231.21<span className="coloring-span">$</span>
+            {windowWidth > 420 ? (
+                <div className="coinflip-content">
+                    <div className="games-information">
+                        <div className="title">
+                            Current Games
                         </div>
-                        <div className="info-description">SUM TOTAL</div>
-                    </div>
-                    <div className="info-element">
-                        <div className="info-header">4</div>
-                        <div className="info-description">GAMES</div>
-                    </div>
-                    <div className="info-element">
-                        <div className="info-header">1</div>
-                        <div className="info-description">
-                            YOU CAN <span className="coloring-span">JOIN</span>
+                        <div className="info">
+                            <div className="info-element">
+                                <div className="info-header">
+                                    1231.21<span className="coloring-span">$</span>
+                                </div>
+                                <div className="info-description">SUM TOTAL</div>
+                            </div>
+                            <div className="info-element">
+                                <div className="info-header">4</div>
+                                <div className="info-description">GAMES</div>
+                            </div>
+                            <div className="info-element">
+                                <div className="info-header">1</div>
+                                <div className="info-description">
+                                    YOU CAN <span className="coloring-span">JOIN</span>
+                                </div>
+                            </div>
+                            <div className="game-create-container">
+                                <button className="create-game-btn">
+                                    Create
+                                </button>
+                            </div>
                         </div>
                     </div>
-                    <div className="game-create-container">
-                        <button className="create-game-btn">
-                            CREATE
-                        </button>
-                    </div>
-                </div>
-            </div>
 
-            <div className="games-container">
-                <div className="elements-names">
-                    <div className="element-name">
-                        PLAYER
-                    </div>
-                    <div className="element-name">
-                        ITEMS
-                    </div>
-                    <div className="element-name">
-                        SUMM
+                    <div className="games-container">
+                        <div className="current-games">
+                            <CoinFlipGame></CoinFlipGame>
+                            <CoinFlipGame></CoinFlipGame>
+                            <CoinFlipGame></CoinFlipGame>
+                            <CoinFlipGame></CoinFlipGame>
+                            <CoinFlipGame></CoinFlipGame>
+                            <CoinFlipGame></CoinFlipGame>
+                            <CoinFlipGame></CoinFlipGame>
+                        </div>
                     </div>
                 </div>
-                <div className="games">
-                    <CoinFlipGame></CoinFlipGame>
-                </div>
-            </div>
+            ) :
+                (
+                    <div className="coinflip-content">
+                        <div className="games-information">
+                            <div className="title">
+                                Current Games
+                            </div>
+                            <div className="info">
+                                <div className="info-element">
+                                    <div className="info-header">
+                                        1231.21<span className="coloring-span">$</span>
+                                    </div>
+                                    <div className="info-description">SUM TOTAL</div>
+                                </div>
+                                <div className="info-element">
+                                    <div className="info-header">4</div>
+                                    <div className="info-description">GAMES</div>
+                                </div>
+                                <div className="info-element">
+                                    <div className="info-header">1</div>
+                                    <div className="info-description">
+                                        YOU CAN <span className="coloring-span">JOIN</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="game-create-container">
+                                <button className="create-game-btn">
+                                    Create
+                                </button>
+                            </div>
+                        </div>
+
+                        <div className="games-container">
+                            <div className="current-games">
+                                <CoinFlipGame></CoinFlipGame>
+                                <CoinFlipGame></CoinFlipGame>
+                                <CoinFlipGame></CoinFlipGame>
+                                <CoinFlipGame></CoinFlipGame>
+                                <CoinFlipGame></CoinFlipGame>
+                                <CoinFlipGame></CoinFlipGame>
+                                <CoinFlipGame></CoinFlipGame>
+                            </div>
+                        </div>
+                    </div>
+                )
+            }
         </>
     );
 }
