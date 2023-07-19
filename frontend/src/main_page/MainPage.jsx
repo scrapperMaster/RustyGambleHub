@@ -31,7 +31,7 @@ const MainPage = () =>{
                 <div className="container">
                     <Chat></Chat>
                     {selectedContent ==="coinflip" && <CoinFlip></CoinFlip>}
-                    {selectedContent ==="maincontent" && <MainContent></MainContent>}
+                    {selectedContent ==="maincontent" && <MainContent onContentChange={handleContentChange}></MainContent>}
                 </div>
             </main>
 
