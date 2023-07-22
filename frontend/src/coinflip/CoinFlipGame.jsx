@@ -1,10 +1,15 @@
 import React, {useState, useEffect} from "react";
+import ReactDOM from 'react-dom';
 import ViewGameWindow from "./ViewGameWindow";
 import './coinflip-game.css'
 
 const CoinFlipGame = () => {
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
     const [showViewWindow, setShowViewWindow] = useState(false);
+
+    const handleCloseWindow = () =>{
+        setShowViewWindow(false);
+    }
 
     useEffect(() =>{
         const handleResize = () =>{
@@ -50,7 +55,7 @@ const CoinFlipGame = () => {
                     View
                 </button>
             </div>
-            {showViewWindow === true && <ViewGameWindow></ViewGameWindow>}
+            {showViewWindow === true && ReactDOM.createPortal(<ViewGameWindow onContentChange={handleCloseWindow} />, document.body)}
         </div>
     );
 }
