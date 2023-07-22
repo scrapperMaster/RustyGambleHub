@@ -119,7 +119,7 @@
         font-size: 1.2rem;
     }
 
-    .game-join-bt{
+    .game-join-bt, .game-view-bt{
         font-size: 1.2rem;
     }
 }
@@ -135,6 +135,10 @@
     .player-avatar{
         width: 80px;
         height: 80px;
+    }
+    .game-join-bt, .game-view-bt{
+        font-size: 1rem;
+        padding: 5px 13px;
     }
 }
 
