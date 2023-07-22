@@ -1,0 +1,61 @@
+.view-game-container {
+    position: absolute;
+    background-color: rgba(255, 0, 0, 0.546);
+    width: 60vw;
+    height: 60vh;
+    z-index: 1;
+    top: -51px;
+    left: 34px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.coinflip-game-players{
+    
+}
+
+.coinflip-player-info {
+    width: 45%;
+    background-color: rgba(33, 10, 161, 0.564);
+}
+
+.coinflip-player-info-container {
+}
+
+.coinpflip-player-info-avatar {
+}
+
+.coinflip-player-info-img {
+}
+
+.coinflip-player-game-info {
+}
+
+.coinflip-player-info-name {
+}
+
+.coinflip-player-info-percents {
+}
+
+.coinflip-player-info-bet-items {
+}
+
+.coinflip-player-info-item {
+}
+
+.coinflip-player-info-bet-item-img {
+}
+
+.coinflip-player-info-bet-summ {
+}
+
+.coinflip-game-info-container {
+}
+
+.info-icon {
+}
+
+.coinflip-game-info-full-info {
+}

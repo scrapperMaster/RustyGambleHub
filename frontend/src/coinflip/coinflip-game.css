@@ -1,9 +1,11 @@
 .coinflip-game{
+    position: relative;
     display: flex;
     width: 90%;
     border-radius: 5px;
     justify-content: space-around;
-    background-color: rgba(255, 255, 255, 0.023);
+    background-color: rgba(209, 29, 29, 0.1);
+    border-bottom: 1px solid var(--color_1);
 }
 
 .player-info{
@@ -74,6 +76,9 @@
 .game-join-con{
     width: 15%;
     display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    column-gap: 10px;
     align-items: center;
     justify-content: center;
 }
@@ -89,6 +94,21 @@
 }
 
 .game-join-bt:hover{
+    cursor: pointer;
+    transform: scale(1.1);
+    border-radius: 8px;
+}
+
+.game-view-bt{
+    border: none;
+    border-radius: 5px;
+    padding: 8px 25px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    transition: all 0.15s;
+}
+
+.game-view-bt:hover{
     cursor: pointer;
     transform: scale(1.1);
     border-radius: 8px;

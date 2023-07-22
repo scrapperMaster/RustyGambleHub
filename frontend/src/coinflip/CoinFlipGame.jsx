@@ -1,8 +1,10 @@
 import React, {useState, useEffect} from "react";
+import ViewGameWindow from "./ViewGameWindow";
 import './coinflip-game.css'
 
 const CoinFlipGame = () => {
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+    const [showViewWindow, setShowViewWindow] = useState(false);
 
     useEffect(() =>{
         const handleResize = () =>{
@@ -44,7 +46,11 @@ const CoinFlipGame = () => {
                 <button className="game-join-bt">
                     Join
                 </button>
+                <button className="game-view-bt" onClick={() => setShowViewWindow(true)}>
+                    View
+                </button>
             </div>
+            {showViewWindow === true && <ViewGameWindow></ViewGameWindow>}
         </div>
     );
 }
