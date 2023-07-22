@@ -27,7 +27,7 @@ const Header = ({ onContentChange }) => {
         <header>
             <div className="logo">
                 <a onClick={() => onContentChange("maincontent")} title="RustyGamble" >
-                    <img src="/logo.png" alt="Logo"/>
+                    <img src="/logo-test.png" alt="Logo"/>
                 </a>
             </div>
 
