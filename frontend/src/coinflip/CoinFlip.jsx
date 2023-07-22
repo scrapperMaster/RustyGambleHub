@@ -51,9 +51,9 @@ const CoinFlip = () => {
 
                     <div className="games-container">
                         <div className="current-games">
-                            <CoinFlipGame></CoinFlipGame>
-                            <CoinFlipGame></CoinFlipGame>
-                            <CoinFlipGame></CoinFlipGame>
+                            <CoinFlipGame name="pedik"></CoinFlipGame>
+                            <CoinFlipGame name="pupa"></CoinFlipGame>
+                            <CoinFlipGame name="lupa"></CoinFlipGame>
                             <CoinFlipGame></CoinFlipGame>
                             <CoinFlipGame></CoinFlipGame>
                             <CoinFlipGame></CoinFlipGame>

@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import ViewGameWindow from "./ViewGameWindow";
 import './coinflip-game.css'
 
-const CoinFlipGame = () => {
+const CoinFlipGame = (props) => {
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
     const [showViewWindow, setShowViewWindow] = useState(false);
 
@@ -55,7 +55,8 @@ const CoinFlipGame = () => {
                     View
                 </button>
             </div>
-            {showViewWindow === true && ReactDOM.createPortal(<ViewGameWindow onContentChange={handleCloseWindow} />, document.body)}
+            
+            {showViewWindow === true && ReactDOM.createPortal(<ViewGameWindow name={props.name} onContentChange={handleCloseWindow} />, document.body)}
         </div>
     );
 }
