@@ -1,57 +1,92 @@
-{% extends 'main/base.html' %}
-{% load static %}
+{load static}
+<!DOCTYPE html>
+<html lang="en">
 
-{% block assets %}
+<head>
     <meta charset="UTF-8">
-    <meta name="keywords" content="rustygamble, rusty gamble, coinflip, rust, jackpot, online gaming, gambling, betting, multiplayer games, game platform, gaming community, rust skins, virtual items, winning chances, gaming experience, fair play, gaming tournaments, esports" />
-    <meta name="description" content="Discover RustyGamble - the ultimate service for coin flipping and more. Join us soon for an exciting experience featuring Rust, jackpots, and more. Stay tuned for updates and visit our Discord community for additional information." />
+    <meta name="keywords"
+        content="rustygamble, rusty gamble, coinflip, rust, jackpot, online gaming, gambling, betting, multiplayer games, game platform, gaming community, rust skins, virtual items, winning chances, gaming experience, fair play, gaming tournaments, esports" />
+    <meta name="description"
+        content="Discover RustyGamble - the ultimate service for coin flipping and more. Join us soon for an exciting experience featuring Rust, jackpots, and more. Stay tuned for updates and visit our Discord community for additional information." />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="{% static 'main/css/discord.css' %}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/png" href="{% static 'main/img/favicon.png'%}" sizes="16x16">
-{% endblock %}
+    <link rel="icon" type="image/png" href="{% static 'main/img/favicon.ico'%}" sizes="16x16">
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+            width: 100%;
+            height: 101vh;
+            overflow: hidden;
+            position: relative;
+        }
 
-{% block title %}
-    Jopa
-{% endblock %}
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: fill;
+            pointer-events: none;
+        }
 
+        a {
+            position: absolute;
+            top: 47%;
+            left: 71%;
+            width: 300px;
+            height: 300px;
+            border-radius: 100%;
+            transition: all 0.15s;
 
-{% block content %}
-     <main>
-        <div class="logo">
-            <img class="logo-img" alt="RustyGamble" src="{% static 'main/img/logo.gif'%}">
-        </div>
-        <div class="description">
-            <p class="first-line"><span>Cum</span>ming <span>soon</span></p>
-            <p class="second-line">For <span>more</span> information, <span>check out</span> our
+        }
 
-            </div>
-            </p>
+        a:hover {
+            box-shadow: 0px 0px 5px rgba(255, 255, 255, 0.365);
+        }
 
-        <div class="discord-links">
-            <a class="discord-link" href="https://discord.gg/2J4Ewwug9c" title="RustyGamble discord" target="_blank">
-                <button class="discord-bt">
-                    <img class="discord-bt-img" src="{% static 'main/img/discord-button.png'%}">
-                </button>
-            </a>
-        </div>
-    </main>
-    <div class="area" >
-        <ul class="circles">
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-        </ul>
-</div >
-    <script src="{%static 'main/js/animation.js'%}"></script>
-{% endblock %}
+        @media (min-width:1300px) {
+            a{
+
+                top: 48%;
+                left: 73%;
+                width: 350px;
+                height: 350px;
+            } 
+        }
+
+        @media (max-width: 800px) {
+            a{
+                top: 65%;
+                left: 31%;      
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <img src="{% static 'main/static/img/banner-discord.png'%}">
+    <a href="https://discord.gg/2J4Ewwug9c">
+    </a>
+    <script>
+        window.addEventListener('DOMContentLoaded', function () {
+            var img = document.querySelector('img');
+
+            function updateImageSrc() {
+                if (window.innerWidth < 800) {
+                    img.src = "{% static 'main/static/img/banner-discord-mobile.png'%}";
+                } else {
+                    img.src = "{% static 'main/static/img/banner-discord.png'%}";
+                }
+            }
+
+            // Call the function on page load
+            updateImageSrc();
+
+            // Call the function whenever the window is resized
+            window.addEventListener('resize', updateImageSrc);
+        });
+    </script>
+</body>
+</html>
