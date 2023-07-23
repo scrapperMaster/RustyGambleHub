@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'social_django',
     'corsheaders',
     'main',
 ]
@@ -59,8 +58,11 @@ MIDDLEWARE = [
 
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
+    'https://a1f0-193-239-147-48.ngrok-free.app',
     # Добавьте другие допустимые источники, если нужно
 ]
+
+CORS_ALLOW_CREDENTIALS = True
 
 ROOT_URLCONF = 'RustyGambleHub.urls'
 
@@ -115,13 +117,27 @@ AUTH_PASSWORD_VALIDATORS = [
 
 AUTHENTICATION_BACKENDS = [
     'social_core.backends.steam.SteamOpenId',
+    'django.contrib.auth.backends.ModelBackend',
 ]
 
-SOCIAL_AUTH_STEAM_API_KEY = '341ED40A8E40DD565B04955FAF9F9CB0'
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'
 
-SOCIAL_AUTH_STEAM_EXTRA_DATA = ['player']
+SOCIAL_AUTH_OPENID_TRUSTED_ROOTS = [
+    'https://steamcommunity.com/openid',
+    'https://steamcommunity.com/openid/login',
+]
 
-SOCIAL_AUTH_URL_NAMESPACE = 'social'
+SOCIAL_AUTH_OPENID_KEY = 'D5C54B21C2B3BBAFB8F5E3B9E5893A9C'  # Замените на ваш Steam API Key
+SOCIAL_AUTH_OPENID_SECRET = 'D5C54B21C2B3BBAFB8F5E3B9E5893A9C'  # Замените на ваш Steam API Key
+
+
+SOCIAL_AUTH_OPENID_JSON_NEW_USER = True
+SOCIAL_AUTH_OPENID_USERNAME_FIXER = lambda username: username  # Если нужно, можно указать функцию для исправления имени пользователя
+
+SESSION_COOKIE_SAMESITE = None
+
+LOGIN_URL = '/api/steam_login/'
+LOGIN_REDIRECT_URL = ''
 
 SOCIAL_AUTH_PIPELINE = (
     'social_core.pipeline.social_auth.social_details',

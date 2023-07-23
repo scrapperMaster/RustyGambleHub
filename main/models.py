@@ -1,7 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
 class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
     steam_id = models.CharField(max_length=255, unique=True)
     username = models.CharField(max_length=255, blank=True, null=True)
     avatar = models.URLField(blank=True, null=True)  # Ссылка на аватар пользователя из Steam API
