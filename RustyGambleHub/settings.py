@@ -58,7 +58,7 @@ MIDDLEWARE = [
 
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
-    'https://a1f0-193-239-147-48.ngrok-free.app',
+    'https://7935-87-117-53-115.ngrok-free.app',
     # Добавьте другие допустимые источники, если нужно
 ]
 

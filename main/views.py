@@ -64,7 +64,9 @@ def steam_authenticate(request):
             request.session['steam_user_id'] = steam_user_id
             request.session['user_id'] = user.id  # Сохраняем ID пользователя в сессии
 
-            return redirect('https://a1f0-193-239-147-48.ngrok-free.app/')  # Замените URL на ваш фронтенд
+            print(f"Пользователь добавлен \n{user_profile} \n{user} \n{user_profile.steam_id}")
+
+            return redirect('https://7935-87-117-53-115.ngrok-free.app/')  # Замените URL на ваш фронтенд
 
     return JsonResponse({'error': 'Failed to get user data from Steam API'}, status=500)
 
