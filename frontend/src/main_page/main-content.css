@@ -63,7 +63,7 @@
   .games{
     width: 66.6%;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     flex-wrap: wrap;
     row-gap: 20px;
     column-gap: 20px;

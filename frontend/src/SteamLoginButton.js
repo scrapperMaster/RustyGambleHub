@@ -12,11 +12,19 @@ const SteamLogin = () => {
 
     const handleSteamLogin = () => {
         console.log("Клик по кнопке Войти через Steam");
-        setRedirectToSteam(true);
-        window.location.href = 'http://localhost:8005/api/steam_login/';
+        // setRedirectToSteam(true);
+        // window.location.href = 'http://localhost:8005/api/steam_login/';
+        setUser(
+            {
+                username: "rustygamble.com",
+                avatar:"https://avatars.steamstatic.com/b2242f9413081c75ea778a14bae0b9943aa615e9_full.jpg",
+                steamid: "76561198330697265"
+            }
+        );
+        console.log(user);
     };
 
-    useEffect(() => {
+    useEffect(() => { 
         if (redirectToSteam) {
             getAuthUrl();
         }
@@ -41,7 +49,7 @@ const SteamLogin = () => {
                 withCredentials: true, // Важно добавить эту опцию для передачи аутентификационных данных
             })
             .then((response) => {
-                setUser(response.data);
+
                 console.log(response.data);
             })
             .catch((error) => {

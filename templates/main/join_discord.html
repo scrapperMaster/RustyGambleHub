@@ -16,7 +16,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="{% static 'main/img/favicon.ico'%}" sizes="16x16">
     <style>
-        body {
+        body, html {
             padding: 0;
             margin: 0;
             width: 100%;
@@ -48,19 +48,28 @@
         }
 
         @media (min-width:1300px) {
-            a{
+            a {
 
                 top: 48%;
                 left: 73%;
                 width: 350px;
                 height: 350px;
-            } 
+            }
         }
 
         @media (max-width: 800px) {
-            a{
+            a {
                 top: 65%;
-                left: 31%;      
+                left: 31%;
+            }
+        }
+
+        @media (max-width: 490px) {
+            a {
+                width: 250px;
+                height: 250px;
+                top: 67%;
+                left: 24%;
             }
         }
     </style>
@@ -90,4 +99,5 @@
         });
     </script>
 </body>
+
 </html>
