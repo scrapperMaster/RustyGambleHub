@@ -1,4 +1,4 @@
-{load static}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,6 +9,7 @@
     <meta name="description"
         content="Discover RustyGamble - the ultimate service for coin flipping and more. Join us soon for an exciting experience featuring Rust, jackpots, and more. Stay tuned for updates and visit our Discord community for additional information." />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -66,7 +67,7 @@
 </head>
 
 <body>
-    <img src="{% static 'main/static/img/banner-discord.png'%}">
+    <img src="{% static 'main/img/banner-discord.png'%}">
     <a href="https://discord.gg/2J4Ewwug9c">
     </a>
     <script>
@@ -75,9 +76,9 @@
 
             function updateImageSrc() {
                 if (window.innerWidth < 800) {
-                    img.src = "{% static 'main/static/img/banner-discord-mobile.png'%}";
+                    img.src = "{% static 'main/img/banner-discord-mobile.png'%}";
                 } else {
-                    img.src = "{% static 'main/static/img/banner-discord.png'%}";
+                    img.src = "{% static 'main/img/banner-discord.png'%}";
                 }
             }
 

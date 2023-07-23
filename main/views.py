@@ -1,82 +1,100 @@
-from django.shortcuts import render, redirect
-from django.http import HttpResponse, JsonResponse
-from pysteamsignin.steamsignin import SteamSignIn
-from rest_framework.reverse import reverse
-
+import requests
+from django.contrib.auth import logout
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+from django.shortcuts import redirect, render
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 from main.models import UserProfile
 
-def get_steam_auth_url(request):
-    steam_login = SteamSignIn()
-    encoded_data = steam_login.ConstructURL(request.build_absolute_uri(reverse('main:login_done')))
-    return JsonResponse({'auth_url': encoded_data})
+STEAM_API_KEY = 'D5C54B21C2B3BBAFB8F5E3B9E5893A9C'  # Замените на свой Steam API ключ
+STEAM_LOGIN_URL = 'https://steamcommunity.com/openid/login'
+RETURN_TO_URL = 'http://127.0.0.1:8005/api/processlogin'
 
-def login(request):
-    if 'steam_id' in request.session:
-        # Если пользователь уже аутентифицирован, перенаправляем его на защищенную страницу.
-        return redirect('main:protected')
+@csrf_exempt
+def steam_login(request):
+    print('Вошли в steam_login')
+    if request.method == 'GET':
+        print("Метод реквеста - ГЕТ")
+        params = {
+            'openid.ns': 'http://specs.openid.net/auth/2.0',
+            'openid.mode': 'checkid_setup',
+            'openid.return_to': RETURN_TO_URL,
+            'openid.realm': RETURN_TO_URL,
+            'openid.identity': 'http://specs.openid.net/auth/2.0/identifier_select',
+            'openid.claimed_id': 'http://specs.openid.net/auth/2.0/identifier_select',
+        }
+        print("Параметры записаны, произойдёт редирект на Стим.")
 
-    # Выполняем перенаправление на страницу аутентификации Steam
-    steam_login = SteamSignIn()
-    encoded_data = steam_login.ConstructURL(request.build_absolute_uri(reverse('main:login_done')))
-    return redirect(encoded_data)
-
-
-def login_done(request):
-    steam_login = SteamSignIn()
-    steam_id = steam_login.ValidateResults(request.GET)
-
-    if steam_id:
-        # Проверяем, существует ли пользователь с данным SteamID
-        user, created = UserProfile.objects.get_or_create(steam_id=steam_id)
-
-        # Сохраняем SteamID в сессии
-        request.session['steam_id'] = steam_id
-
-        # Можно также сохранить информацию о пользователе в сессии или в базе данных
-        request.session['username'] = user.username
-        request.session['profile_photo'] = user.avatar
-
-        return redirect('main:protected')
-    else:
-        # Если аутентификация не удалась, перенаправляем пользователя на страницу ошибки.
-        return redirect('main:error')
-
-def logout(request):
-    if 'steam_id' in request.session:
-        # Если пользователь аутентифицирован, удаляем SteamID из сессии.
-        del request.session['steam_id']
-    return redirect('localhost:3000')
+        # Redirect the user to the Steam sign-in page using the constructed URL
+        return redirect(STEAM_LOGIN_URL + '?' + '&'.join([f'{key}={value}' for key, value in params.items()]))
+    print("Сейчас будет ошибка")
+    return JsonResponse({'error': 'Invalid request method.'}, status=400)
 
 
-def protected(request):
-    if 'steam_id' in request.session:
-        # Получаем пользователя по SteamID из базы данных
-        steam_id = request.session['steam_id']
-        user = UserProfile.objects.get(steam_id=steam_id)
+@csrf_exempt
+def steam_authenticate(request):
+    print("Процесс Стим логин")
+    steam_encoded_data = dict(request.GET)
+    print(steam_encoded_data)
 
-        # Если пользователь аутентифицирован, отображаем защищенную страницу.
-        return HttpResponse(f'Protected Content for SteamID: {user.steam_id}')
-    else:
-        # Если пользователь не аутентифицирован, перенаправляем его на страницу входа.
-        return redirect('main:login')
+    openid_identity = steam_encoded_data.get('openid.identity', '')  # Получаем список URL-адресов
+    steam_user_id = openid_identity[-1].split('/')[-1]  # Извлекаем последний элемент и разбиваем URL
+
+    if not steam_user_id:
+        return JsonResponse({'error': 'Failed to validate Steam login data. No fkin ID'}, status=400)
+
+    # Проверяем SteamID пользователя с использованием Steam Web API
+    response = requests.get(f'http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key={STEAM_API_KEY}&steamids={steam_user_id}')
+
+    if response.status_code == 200:
+        print('Code 200')
+        data = response.json()
+        player_data = data.get('response', {}).get('players', [])
+
+        if player_data:
+            print('Player data - ok')
+            player_data = player_data[0]
+            username = player_data.get('personaname', '')
+            avatar = player_data.get('avatarfull', '')
+
+            # Создаем или получаем профиль пользователя, связанный с Steam аккаунтом
+            user, created = User.objects.get_or_create(username=username)
+            user_profile, profile_created = UserProfile.objects.get_or_create(user=user, steam_id=steam_user_id, username=username, avatar=avatar)
+            request.session['steam_user_id'] = steam_user_id
+            request.session['user_id'] = user.id  # Сохраняем ID пользователя в сессии
+
+            return redirect('https://a1f0-193-239-147-48.ngrok-free.app/')  # Замените URL на ваш фронтенд
+
+    return JsonResponse({'error': 'Failed to get user data from Steam API'}, status=500)
 
 
-def error(request):
-    return HttpResponse('Ошибка аутентификации. Пожалуйста, попробуйте снова.')
-
+@login_required
 def get_user_data(request):
-    if 'steam_id' in request.session:
-        steam_id = request.session['steam_id']
+    print("Получаем данные пользователя")
+    steam_user_id = request.session.get('steam_user_id', None)
+    if steam_user_id:
         try:
-            user = UserProfile.objects.get(steam_id=steam_id)
+            user_profile = UserProfile.objects.get(steam_id=steam_user_id)
             # Возвращаем данные пользователя в формате JSON
+            print("Возвращаем данные пользователя в формате JSON")
             return JsonResponse({
-                'steam_id': user.steam_id,
-                # Дополнительные поля о пользователе, если они есть
-                'username': user.username,
-                'avatar': user.avatar,
+                'steam_id': user_profile.steam_id,
+                # Дополнительные поля пользователя, если требуется
+                'username': user_profile.username,
+                'avatar': user_profile.avatar,
             })
         except UserProfile.DoesNotExist:
             return JsonResponse({'error': 'Пользователь не найден'}, status=404)
 
     return JsonResponse({'error': 'Пользователь не аутентифицирован'}, status=401)
+
+
+def logout_view(request):
+    logout(request)
+    return JsonResponse({'message': 'User has been logged out successfully.'})
+
+
+
+def discrod(request):
+    return render(request, 'main/join_discord.html')
