@@ -1,5 +1,6 @@
+import django.contrib.auth
 import requests
-from django.contrib.auth import logout
+from django.contrib.auth import logout, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.shortcuts import redirect, render
@@ -60,23 +61,57 @@ def steam_authenticate(request):
 
             # Создаем или получаем профиль пользователя, связанный с Steam аккаунтом
             user, created = User.objects.get_or_create(username=username)
-            user_profile, profile_created = UserProfile.objects.get_or_create(user=user, steam_id=steam_user_id, username=username, avatar=avatar)
+            user_profile, profile_created = UserProfile.objects.get_or_create(user=user, steam_id=steam_user_id,
+                                                                              username=username, avatar=avatar)
+            print('________________________________________________________________________')
+            for key, value in request.session.items():
+                print(key, value)
+            print('________________________________________________________________________')
+
+            # Здесь добавляем steam_user_id в сессию
             request.session['steam_user_id'] = steam_user_id
-            request.session['user_id'] = user.id  # Сохраняем ID пользователя в сессии
+
+            request.session['user'] = user.__dict__  # Сохраняем ID пользователя в сессии
+            print('Првоерка пользователя до и после авторизации')
+            print(request.user)
+            login(request, user, backend='django.contrib.auth.backends.ModelBackend')
+            print(request.user)
 
             print(f"Пользователь добавлен \n{user_profile} \n{user} \n{user_profile.steam_id}")
 
-            return redirect('https://7935-87-117-53-115.ngrok-free.app/')  # Замените URL на ваш фронтенд
+            print('________________________________________________________________________')
+            for key, value in request.session.items():
+                print(key, value)
+            print('________________________________________________________________________')
+
+            return redirect('https://ce99-5-254-40-39.ngrok-free.app/')  # Замените URL на ваш фронтенд
 
     return JsonResponse({'error': 'Failed to get user data from Steam API'}, status=500)
 
 
 @login_required
+@csrf_exempt
 def get_user_data(request):
     print("Получаем данные пользователя")
+    print(request.user)
+
+    print('Ключи сессиaй')
+    for key, value in request.session.items():
+        print(key, value)
+
     steam_user_id = request.session.get('steam_user_id', None)
+    user_id = request.session.get('_auth_user_id', None)
+    print(f' STEAM ID {steam_user_id}')
+    user = User.objects.get(id=user_id)
+    print(f'USER: {user}')
+
+    user_profile = UserProfile.objects.get(user__id=user.id)
+    print('____________________________________________________')
+
     if steam_user_id:
         try:
+            print('_____________________________________')
+            print('ВОШЛИ КУДА НАДО')
             user_profile = UserProfile.objects.get(steam_id=steam_user_id)
             # Возвращаем данные пользователя в формате JSON
             print("Возвращаем данные пользователя в формате JSON")
@@ -89,7 +124,7 @@ def get_user_data(request):
         except UserProfile.DoesNotExist:
             return JsonResponse({'error': 'Пользователь не найден'}, status=404)
 
-    return JsonResponse({'error': 'Пользователь не аутентифицирован'}, status=401)
+    return JsonResponse({'error': 'Пользователь не аутентифицирован 401'}, status=401)
 
 
 def logout_view(request):

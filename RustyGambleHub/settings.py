@@ -41,8 +41,22 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'corsheaders',
+    'debug_toolbar',
     'main',
 ]
+
+INTERNAL_IPS = [
+    # ...
+    '5.254.43.232',
+    '31.23.28.24',
+    '127.0.0.1'
+    # ...
+]
+
+DEBUG_TOOLBAR_CONFIG = {
+    'SHOW_COLLAPSED': True,
+    # Other configurations as needed
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -54,13 +68,17 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware'
 ]
 
-CORS_ALLOWED_ORIGINS = [
-    'http://localhost:3000',
-    'https://7935-87-117-53-115.ngrok-free.app',
-    # Добавьте другие допустимые источники, если нужно
-]
+# CORS_ALLOWED_ORIGINS = [
+#     'http://localhost:3000',
+#     'https://529e-31-23-28-24.ngrok-free.app',
+#     'https://ce99-5-254-40-39.ngrok-free.app '
+#     # Добавьте другие допустимые источники, если нужно
+# ]
+
+CORS_ORIGIN_ALLOW_ALL = True
 
 CORS_ALLOW_CREDENTIALS = True
 
@@ -120,7 +138,8 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
 ]
 
-SESSION_ENGINE = 'django.contrib.sessions.backends.db'
+# SESSION_ENGINE = 'django.contrib.sessions.backends.db'
+SESSION_ENGINE = 'django.contrib.sessions.backends.cached_db'
 
 SOCIAL_AUTH_OPENID_TRUSTED_ROOTS = [
     'https://steamcommunity.com/openid',
