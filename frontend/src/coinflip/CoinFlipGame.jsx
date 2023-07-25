@@ -58,17 +58,20 @@ const CoinFlipGame = (props) => {
                         </button>
                     </div>
 
-                    {showViewWindow === true && ReactDOM.createPortal(<ViewGameWindow name={props.name} onContentChange={handleCloseWindow} />, document.body)}
+                    {showViewWindow === true && ReactDOM.createPortal(<ViewGameWindow owner_name={props.owner_name} second_player_name={props.second_player_name} onContentChange={handleCloseWindow} />, document.body)}
                 </div>
             )}
             {gameState === "bet_state" && (
                 <div className="coinflip-game">
-                    <div className="player-info">
+                    <div className="player-info players-info">
                         <div className="player-avatar">
                             <img className="player-img" src="avatar.png" />
                         </div>
-                        <div className="player-name">
-                            {props.owner_name}
+                        <div className="coinflip-vs-img-container">
+                            <img className="coinflip-vs-img" alt="vs" src="vs.png"></img>
+                        </div>
+                        <div className="player-avatar">
+                            <img className="player-img" src="avatar.png" />
                         </div>
                     </div>
                     <div className={`player-items ${windowWidth < 1308 ? 'hide-extra-items' : ''}`}>
@@ -90,17 +93,20 @@ const CoinFlipGame = (props) => {
                             View
                         </button>
                     </div>
-                    {showViewWindow === true && ReactDOM.createPortal(<ViewGameWindow name={props.name} onContentChange={handleCloseWindow} />, document.body)}
+                    {showViewWindow === true && ReactDOM.createPortal(<ViewGameWindow owner_name={props.owner_name} second_player_name={props.second_player_name} onContentChange={handleCloseWindow} />, document.body)}
                 </div>
             )}
             {gameState === "played_state" && (
                 <div className="coinflip-game played-state">
-                    <div className="player-info">
+                    <div className="player-info players-info">
                         <div className="player-avatar">
                             <img className="player-img" src="avatar.png" />
                         </div>
-                        <div className="player-name">
-                            {props.owner_name}
+                        <div className="coinflip-vs-img-container">
+                            <img className="coinflip-vs-img" alt="vs" src="vs.png"></img>
+                        </div>
+                        <div className="player-avatar">
+                            <img className="player-img" src="avatar.png" />
                         </div>
                     </div>
                     <div className={`player-items ${windowWidth < 1308 ? 'hide-extra-items' : ''}`}>
@@ -122,7 +128,7 @@ const CoinFlipGame = (props) => {
                             View
                         </button>
                     </div>
-                    {showViewWindow === true && ReactDOM.createPortal(<ViewGameWindow name={props.owner_name} onContentChange={handleCloseWindow} />, document.body)}
+                    {showViewWindow === true && ReactDOM.createPortal(<ViewGameWindow owner_name={props.owner_name} second_player_name={props.second_player_name} onContentChange={handleCloseWindow} />, document.body)}
                 </div>
             )}
         </>

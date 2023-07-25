@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import './view-game-window.css'
 
-const ViewGameWindow = ({name, onContentChange}) => {
+const ViewGameWindow = ({owner_name, second_player_name, onContentChange}) => {
     const [isWindowOpen, setIsWindowOpen] = useState(true);
 
     const closeWindow = () =>{
@@ -27,7 +27,7 @@ const ViewGameWindow = ({name, onContentChange}) => {
                                     </div>
                                     <div className="coinflip-player-game-info">
                                         <div className="coinflip-player-info-name">
-                                            Barabashka
+                                            {owner_name}
                                         </div>
                                         <div className="coinflip-player-info-percents">
                                             50%
@@ -74,7 +74,7 @@ const ViewGameWindow = ({name, onContentChange}) => {
                                     </div>
                                     <div className="coinflip-player-game-info">
                                         <div className="coinflip-player-info-name">
-                                            {name}
+                                            {second_player_name}
                                         </div>
                                         <div className="coinflip-player-info-percents">
                                             50%

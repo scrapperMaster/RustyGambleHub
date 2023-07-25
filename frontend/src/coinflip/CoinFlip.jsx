@@ -51,13 +51,16 @@ const CoinFlip = () => {
 
                     <div className="games-container">
                         <div className="current-games">
-                            <CoinFlipGame state="join_state" owner_name="pedik"></CoinFlipGame>
                             <CoinFlipGame
-                             state="played_state"
-                             owner_name="pupa"
-                             second_player_name="lupa"
+                                state="join_state"
+                                owner_name="pedik"
+                                second_player_name="waiting for player"
                             />
-                            <CoinFlipGame state="bet_state" name="lupa"></CoinFlipGame>
+                            <CoinFlipGame
+                                state="played_state"
+                                owner_name="pupa"
+                                second_player_name="lupa"
+                            />
                         </div>
                     </div>
                 </div>
