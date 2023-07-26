@@ -3,6 +3,7 @@ import axios from "axios";
 import UserPage from "./UserPage";
 
 const SteamLogin = () => {
+    const url = "https://02a4-45-15-146-19.ngrok-free.app";
     const [redirectToSteam, setRedirectToSteam] = useState(false);
     const [showRedirectMessage, setShowRedirectMessage] = useState(false);
     const [user, setUser] = useState(null);
@@ -11,7 +12,7 @@ const SteamLogin = () => {
     const handleSteamLogin = () => {
         console.log("Клик по кнопке Войти через Steam");
         setRedirectToSteam(true);
-        window.location.href = "http://127.0.0.1:8005/api/steam_login/";
+        window.location.href = `${url}/api/steam_login/`;
     };
 
     useEffect(() => {
@@ -22,7 +23,7 @@ const SteamLogin = () => {
 
     const getAuthUrl = () => {
         axios
-            .get("http://127.0.0.1:8005/api/steam_login/")
+            .get(`${url}/api/steam_login/`)
             .then((response) => {
                 setRedirectToSteam(false);
                 setShowRedirectMessage(true);
@@ -35,12 +36,12 @@ const SteamLogin = () => {
 
     const fetchUserData = () => {
         axios
-            .get("http://127.0.0.1:8005/api/user_data/", {
+            .get(`${url}/api/user_data/`, {
                 withCredentials: true,
             })
             .then((response) => {
                 setUser(response.data);
-                console.log(response.data);
+                console.log("response" + response.data);
             })
             .catch((error) => {
                 console.log(error);
@@ -92,5 +93,5 @@ const SteamLogin = () => {
     );
 };
 
-export default SteamLogin;
+// export default SteamLogin;
 

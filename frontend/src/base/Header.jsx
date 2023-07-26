@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
 import SteamLogin from "../SteamLoginButton";
+import SteamLoginButton from "./SteamLoginButton";
 
 const Header = ({ onContentChange }) => {
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -61,7 +62,7 @@ const Header = ({ onContentChange }) => {
                             <a className="discord-button" href="#">
                                 Discord
                             </a>
-                            <SteamLogin/> {/* Вставляем компонент SteamLoginButton */}
+                            <SteamLoginButton/> {/* Вставляем компонент SteamLoginButton */}
                             <button className={`close-sidebar ${isSidebarOpen ? "" : "open-sidebar"}`}
                                     onClick={handleOpenBar}>
                             </button>
@@ -93,7 +94,7 @@ const Header = ({ onContentChange }) => {
                         <a className="discord-button" href="#">
                             Discord
                         </a>
-                        <SteamLogin/> {/* Вставляем компонент SteamLoginButton */}
+                        <SteamLoginButton/> {/* Вставляем компонент SteamLoginButton */}
                     </div>
                 </>
             )}
