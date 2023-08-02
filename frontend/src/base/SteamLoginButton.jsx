@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import axios from "axios";
 import UserPage from "../UserPage";
 
 const SteamLoginButton = () => {
-    const url = "https://02a4-45-15-146-19.ngrok-free.app";
+    const url = "https://db7e-5-254-43-230.ngrok-free.app";
     const [user, setUser] = useState(null);
 
     const handleLogin = () => {
@@ -14,40 +14,57 @@ const SteamLoginButton = () => {
 
     const getAuthUrl = () => {
         axios
-            .get(`${url}/api/steam_login/`, { withCredentials: true })
+            .get(`${url}/api/steam_login/`, {withCredentials: true})
             .then((response) => {
                 window.location.href = response.data.redirect_url;
             })
             .catch((error) => {
                 console.log(error);
             })
-            .finally(() => fetchUserData());
+            .finally(() => {
+                fetchUserData();
+            });
     };
 
     const fetchUserData = () => {
         console.log("click finnaly")
-        fetch('https://02a4-45-15-146-19.ngrok-free.app/api/user_data/', {
-            credentials: 'include',
-        })
-            .then(response => {
-                // Обработка ответа от бекенда
-                console.log(response.data);
+        axios
+            .get(`${url}/api/user_data/`, {withCredentials: true})
+            .then((response) => {
+                setUser(response.data);
+                console.log('user: ', user);
             })
-            .catch(error => {
-                // Обработка ошибки
-                console.error(error);
+            .catch((error) => {
+                console.log(error);
+            })
+            .finally(() => {
+                console.log('Всё успешно!')
             });
+    };
+
+    useEffect(() => {
+        console.log('user in useEffect: ', user);
+    }, []);
+
+    const handleFetchUserData = () => {
+        fetchUserData();
     };
 
     return (
         <>
-            <button onClick={() => fetchUserData()}>finnly</button>
+            <button onClick={handleFetchUserData}>finnly</button>
             <button onClick={() => handleLogin()}>Login</button>
+            {/* Отображайте данные только если user не равен null */}
             {user && (
-                <UserPage></UserPage>
-            )}
-        </>
+                <UserPage user={user.user_data} />
 
+            )}
+            <div>
+                {/*<p>Steam ID: {user.steamid}</p>*/}
+                {/*<p>Username: {user.username}</p>*/}
+                {/*<img src={user.avatar} alt="User Avatar" />*/}
+            </div>
+        </>
     );
 
 };

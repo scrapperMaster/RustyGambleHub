@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 import os
 from pathlib import Path
 
+from django.http import HttpResponse
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -66,17 +68,19 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
+    # 'corsheaders.middleware.CorsMiddleware',
+    'main.middlewares.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware'
 ]
 
-# CORS_ALLOWED_ORIGINS = [
-#     'http://localhost:3000',
-#     'https://529e-31-23-28-24.ngrok-free.app',
-#     'https://ce99-5-254-40-39.ngrok-free.app '
-#     # Добавьте другие допустимые источники, если нужно
-# ]
+CORS_ALLOWED_ORIGINS = [
+    # 'http://localhost:3000',
+    'https://93f0-5-254-43-230.ngrok-free.app',
+    'https://steamcommunity.com',
+    # 'https://ce99-5-254-40-39.ngrok-free.app '
+    # Добавьте другие допустимые источники, если нужно
+]
 
 CORS_ORIGIN_ALLOW_ALL = True
 
@@ -141,22 +145,16 @@ AUTHENTICATION_BACKENDS = [
 # SESSION_ENGINE = 'django.contrib.sessions.backends.db'
 SESSION_ENGINE = 'django.contrib.sessions.backends.cached_db'
 
-SOCIAL_AUTH_OPENID_TRUSTED_ROOTS = [
-    'https://steamcommunity.com/openid',
-    'https://steamcommunity.com/openid/login',
-]
+SESSION_COOKIE_SECURE = True
+SESSION_COOKIE_SAMESITE = 'None'
+
 
 SOCIAL_AUTH_OPENID_KEY = 'D5C54B21C2B3BBAFB8F5E3B9E5893A9C'  # Замените на ваш Steam API Key
 SOCIAL_AUTH_OPENID_SECRET = 'D5C54B21C2B3BBAFB8F5E3B9E5893A9C'  # Замените на ваш Steam API Key
 
 
-SOCIAL_AUTH_OPENID_JSON_NEW_USER = True
-SOCIAL_AUTH_OPENID_USERNAME_FIXER = lambda username: username  # Если нужно, можно указать функцию для исправления имени пользователя
-
-SESSION_COOKIE_SAMESITE = None
-
 LOGIN_URL = '/api/steam_login/'
-LOGIN_REDIRECT_URL = ''
+LOGIN_REDIRECT_URL = '/api/user_data/'
 
 SOCIAL_AUTH_PIPELINE = (
     'social_core.pipeline.social_auth.social_details',
