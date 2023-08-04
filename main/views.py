@@ -1,3 +1,6 @@
+import json
+import time
+
 import django.contrib.auth
 import requests
 from django.contrib.auth import logout, login
@@ -10,7 +13,7 @@ from main.models import UserProfile
 
 STEAM_API_KEY = 'DABF63EF1F7B869BF6D51A4014AE2FF4'  # Замените на свой Steam API ключ
 STEAM_LOGIN_URL = 'https://steamcommunity.com/openid/login'
-RETURN_TO_URL = 'https://db7e-5-254-43-230.ngrok-free.app/api/processlogin'
+RETURN_TO_URL = 'https://b0b6-185-244-215-54.ngrok-free.app/api/processlogin'
 
 
 def steam_login(request):
@@ -63,7 +66,7 @@ def steam_authenticate(request):
     print('________________________________________________________________________')
     response = requests.get(f'http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key={STEAM_API_KEY}&steamids={steam_user_id}')
 
-    frontend_url = 'https://93f0-5-254-43-230.ngrok-free.app/'  # Замените на URL вашего фронтенда
+    frontend_url = 'https://0778-185-244-215-54.ngrok-free.app'  # Замените на URL вашего фронтенда
 
     params = {
         'openid.ns': 'http://specs.openid.net/auth/2.0',
@@ -135,6 +138,7 @@ def steam_authenticate(request):
 
 @login_required
 def get_user_data(request):
+    print("ПОЛУЧЕНИЕ ДАННЫХ ПОЛЬЗОВАТЕЛЯ")
     print('Ключи сессий')
     for key, value in request.session.items():
         print(key, value)
@@ -153,48 +157,92 @@ def get_user_data(request):
         return JsonResponse({'error': 'User not authenticated'}, status=401)
 
 
+@login_required
+def get_inventory_items(request):
+    print("ПОЛУЧЕНИЕ ИНВЕНТАРЯ ПОЛЬЗОВАТЕЛЯ")
+    print('Ключи сессии')
+    for key, value in request.session.items():
+        print(key, value)
 
-# @login_required
-# def get_user_data(request):
-#     print("Получаем данные пользователя")
-#     print(request.user)
-#
-#     print('Ключи сессиaй')
-#     for key, value in request.session.items():
-#         print(key, value)
-#
-#     steam_user_id = request.session.get('steam_user_id', None)
-#     user_id = request.session.get('_auth_user_id', None)
-#     print(f' STEAM ID {steam_user_id}')
-#     user = User.objects.get(id=user_id)
-#     print(f'USER: {user}')
-#
-#     user_profile = UserProfile.objects.get(user__id=user.id)
-#     print('____________________________________________________')
-#
-#     if steam_user_id:
-#         try:
-#             print('_____________________________________')
-#             print('ВОШЛИ КУДА НАДО')
-#             user_profile = UserProfile.objects.get(steam_id=steam_user_id)
-#             # Возвращаем данные пользователя в формате JSON
-#             print("Возвращаем данные пользователя в формате JSON")
-#             return JsonResponse({
-#                 'steam_id': user_profile.steam_id,
-#                 # Дополнительные поля пользователя, если требуется
-#                 'username': user_profile.username,
-#                 'avatar': user_profile.avatar,
-#             })
-#         except UserProfile.DoesNotExist:
-#             return JsonResponse({'error': 'Пользователь не найден'}, status=404)
-#
-#     return JsonResponse({'error': 'Пользователь не аутентифицирован 401'}, status=401)
+    # Проверяем, что пользователь аутентифицирован и его steam_id сохранен в сессии
+    if 'user_data' not in request.session:
+        return JsonResponse({'error': 'User not authenticated'}, status=401)
+
+    user_data = request.session['user_data']
+    steam_id = user_data.get('steam_id')
+
+    if not steam_id:
+        return JsonResponse({'error': 'Steam ID not found in user data'}, status=400)
+
+    # Делаем запрос к API Steam, чтобы получить список предметов в инвентаре
+    print("Начало проверки Responce")
+    time.sleep(2)  # Добавляем задержку в 2 секунды перед запросом
+    response = requests.get(f'https://steamcommunity.com/inventory/{steam_id}/252490/2?l=english&count=5000')
+    print("Конец проверки Responce")
+
+    if response.status_code == 200:
+        data = response.json()
+        if data.get('success') == 1:
+            assets = data.get('assets', [])
+            descriptions = data.get('descriptions', [])
+
+            # Определение тегов для проверки на tradable
+            tradable_tags = ["marketable", "tradable"]
+
+            # Функция для проверки наличия tradable в тегах
+
+            formatted_items = []
+
+            for item in data['assets']:
+                item_classid = item['classid']
+                item_instanceid = item['instanceid']
+
+                description = next((desc for desc in data['descriptions'] if
+                                    desc['classid'] == item_classid and desc['instanceid'] == item_instanceid), None)
+
+                if description:
+                    item_name = description.get('name')
+                    item_tradable = description.get('tradable', 0)
+                    item_tags = description.get('tags', [])
+                    formatted_items.append({'name': item_name, 'tradable': item_tradable, 'tags': item_tags})
+
+            print(formatted_items)
+
+            # Вывод данных с отступами
+            print("Data\n")
+            print(data)
+
+
+            # Вывод данных с отступами
+            print("\nFormatted items\n")
+            for item in formatted_items:
+                print(item)
+
+            return JsonResponse({'items': formatted_items})
+        else:
+            print("Ошибка в статус коде 200")
+            return JsonResponse({'error': 'Failed to fetch inventory data from Steam'}, status=500)
+
+    print("Общая ошибка")
+    return JsonResponse({'error': 'Failed to get inventory data from Steam'}, status=500)
+
 
 
 def logout_view(request):
-    logout(request)
-    return JsonResponse({'message': 'User has been logged out successfully.'})
+    # Выполняем выход пользователя из сессии
+    # Удаляем данные о пользователе из сессии
+    if 'user_data' in request.session:
+        print("Сессия до удаления user_data")
+        print(request.session)
+        request.session.modified = True
 
+        del request.session['user_data']
+        print("Сессия до удаления user_data")
+        print(request.session)
+        print("Пользователь был удалён (сессия)")
+        logout(request)
+
+    return JsonResponse({'message': 'User has been logged out successfully.'})
 
 
 def discrod(request):

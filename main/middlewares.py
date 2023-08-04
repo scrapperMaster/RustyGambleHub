@@ -2,7 +2,7 @@ from django.http import HttpResponse
 
 
 def add_cors_headers(response):
-    response['Access-Control-Allow-Origin'] = 'https://93f0-5-254-43-230.ngrok-free.app'  # Замените на URL вашего фронтенда
+    response['Access-Control-Allow-Origin'] = 'https://0778-185-244-215-54.ngrok-free.app'  # Замените на URL вашего фронтенда
     response['Access-Control-Allow-Credentials'] = 'true'
     return response
 

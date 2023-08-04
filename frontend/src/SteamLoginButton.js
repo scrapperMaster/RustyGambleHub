@@ -3,7 +3,7 @@ import axios from "axios";
 import UserPage from "./UserPage";
 
 const SteamLogin = () => {
-    const url = "https://db7e-5-254-43-230.ngrok-free.app";
+    const url = "https://127.0.0.1:8005"; //Это URL Бэкенда
     const [redirectToSteam, setRedirectToSteam] = useState(false);
     const [showRedirectMessage, setShowRedirectMessage] = useState(false);
     const [user, setUser] = useState(null);

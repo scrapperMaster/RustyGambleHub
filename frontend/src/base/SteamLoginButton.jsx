@@ -1,73 +1,55 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import UserPage from "../UserPage";
+import SteamInventory from "../SteamInventory";
 
 const SteamLoginButton = () => {
-    const url = "https://db7e-5-254-43-230.ngrok-free.app";
-    const [user, setUser] = useState(null);
+  const url = "https://b0b6-185-244-215-54.ngrok-free.app"; //backend
+  const [user, setUser] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // Добавляем состояние isLoggedIn
 
-    const handleLogin = () => {
+  // Функция для проверки авторизации пользователя
+  const checkLoginStatus = () => {
+    axios
+      .get(`${url}/api/user_data/`, { withCredentials: true })
+      .then((response) => {
+        if (response.data.user_data) {
+          setUser(response.data);
+          setIsLoggedIn(true); // Устанавливаем значение true, если пользователь авторизован
+        } else {
+          setIsLoggedIn(false); // Устанавливаем значение false, если пользователь не авторизован
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
-        window.location.href = `${url}/api/steam_login/`;
-        getAuthUrl();
-    };
+  useEffect(() => {
+    // При монтировании компонента проверяем статус авторизации
+    checkLoginStatus();
+  }, []);
 
-    const getAuthUrl = () => {
-        axios
-            .get(`${url}/api/steam_login/`, {withCredentials: true})
-            .then((response) => {
-                window.location.href = response.data.redirect_url;
-            })
-            .catch((error) => {
-                console.log(error);
-            })
-            .finally(() => {
-                fetchUserData();
-            });
-    };
+  const handleLogin = () => {
+    window.location.href = `${url}/api/steam_login/`;
+  };
 
-    const fetchUserData = () => {
-        console.log("click finnaly")
-        axios
-            .get(`${url}/api/user_data/`, {withCredentials: true})
-            .then((response) => {
-                setUser(response.data);
-                console.log('user: ', user);
-            })
-            .catch((error) => {
-                console.log(error);
-            })
-            .finally(() => {
-                console.log('Всё успешно!')
-            });
-    };
-
-    useEffect(() => {
-        console.log('user in useEffect: ', user);
-    }, []);
-
-    const handleFetchUserData = () => {
-        fetchUserData();
-    };
-
-    return (
+  return (
+    <>
+      {isLoggedIn ? ( // Проверяем значение isLoggedIn
         <>
-            <button onClick={handleFetchUserData}>finnly</button>
-            <button onClick={() => handleLogin()}>Login</button>
-            {/* Отображайте данные только если user не равен null */}
-            {user && (
-                <UserPage user={user.user_data} />
-
-            )}
-            <div>
-                {/*<p>Steam ID: {user.steamid}</p>*/}
-                {/*<p>Username: {user.username}</p>*/}
-                {/*<img src={user.avatar} alt="User Avatar" />*/}
-            </div>
+          <button onClick={checkLoginStatus}>Refresh User Data</button>
+          <UserPage user={user.user_data} />
         </>
-    );
+      ) : (
+        <button onClick={handleLogin}>Login</button>
+      )}
 
+      <div>
+        {/* Данные пользователя будут отображаться автоматически, если пользователь авторизован */}
+      </div>
+    </>
+  );
 };
-
 
 export default SteamLoginButton;

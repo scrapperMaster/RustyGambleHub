@@ -76,7 +76,7 @@ MIDDLEWARE = [
 
 CORS_ALLOWED_ORIGINS = [
     # 'http://localhost:3000',
-    'https://93f0-5-254-43-230.ngrok-free.app',
+    'https://0778-185-244-215-54.ngrok-free.app',
     'https://steamcommunity.com',
     # 'https://ce99-5-254-40-39.ngrok-free.app '
     # Добавьте другие допустимые источники, если нужно
