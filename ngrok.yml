@@ -1,0 +1,8 @@
+authtoken: 2VFa2BT1QRIZyiizesPjQIK5aWD_2v5EgWDKzdu2Zfxxc6vSW
+tunnels:
+  drf:
+    proto: http
+    addr: 8000
+  react:
+    proto: http
+    addr: 3000

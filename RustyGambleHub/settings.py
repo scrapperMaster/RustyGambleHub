@@ -74,11 +74,14 @@ MIDDLEWARE = [
     'debug_toolbar.middleware.DebugToolbarMiddleware'
 ]
 
+FRONTEND_URL="https://1cef-95-174-127-174.ngrok-free.app"
+BACKEND_URL="https://e98e-95-174-127-174.ngrok-free.app"
+
 CORS_ALLOWED_ORIGINS = [
     # 'http://localhost:3000',
-    'https://0778-185-244-215-54.ngrok-free.app',
+    FRONTEND_URL,
+    BACKEND_URL,
     'https://steamcommunity.com',
-    # 'https://ce99-5-254-40-39.ngrok-free.app '
     # Добавьте другие допустимые источники, если нужно
 ]
 
@@ -147,8 +150,6 @@ SESSION_ENGINE = 'django.contrib.sessions.backends.cached_db'
 
 SESSION_COOKIE_SECURE = True
 SESSION_COOKIE_SAMESITE = 'None'
-
-
 SOCIAL_AUTH_OPENID_KEY = 'D5C54B21C2B3BBAFB8F5E3B9E5893A9C'  # Замените на ваш Steam API Key
 SOCIAL_AUTH_OPENID_SECRET = 'D5C54B21C2B3BBAFB8F5E3B9E5893A9C'  # Замените на ваш Steam API Key
 

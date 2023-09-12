@@ -32,7 +32,9 @@ const Chat = () => {
 
   return (
     <>
-    <div className={`void-div ${isChatVisible ? "" : "void-div-hidden"}`}></div>
+      <div
+        className={`void-div ${isChatVisible ? "" : "void-div-hidden"}`}
+      ></div>
       <div className={`chat-container ${isChatVisible ? "" : "chat-hidden"}`}>
         <div className="chat-title">CHAT</div>
         <div className={`chat-close-bt ${isButtonClose ? "" : "chat-open-bt"}`}>
@@ -43,36 +45,26 @@ const Chat = () => {
         <div className="messages-container">
           <div className="message">
             <div className="avatar">
-              <img
-                className="avatar-img"
-                src="/avatar.png"
-                alt="User Avatar"
-              />
+              <img className="avatar-img" src="/avatar.png" alt="User Avatar" />
             </div>
             <div className="message-content">
               <span className="username">User:</span>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae,
-              nostrum. Commodi quisquam fugiat unde tempora debitis vero ab
-              minus! Deleniti, expedita quos tenetur officiis incidunt
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Molestiae, nostrum. Commodi quisquam fugiat unde tempora debitis
+              vero ab minus! Deleniti, expedita quos tenetur officiis incidunt
               perferendis assumenda eligendi eius praesentium!
             </div>
-            <div className="status-icons">
-              
-            </div>
+            <div className="status-icons"></div>
           </div>
           <div className="message">
             <div className="avatar">
-              <img
-                className="avatar-img"
-                src="/avatar.png"
-                alt="User Avatar"
-              />
+              <img className="avatar-img" src="/avatar.png" alt="User Avatar" />
             </div>
             <div className="message-content">
               <span className="username">User:</span>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae,
-              nostrum. Commodi quisquam fugiat unde tempora debitis vero ab
-              minus! Deleniti, expedita quos tenetur officiis incidunt
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Molestiae, nostrum. Commodi quisquam fugiat unde tempora debitis
+              vero ab minus! Deleniti, expedita quos tenetur officiis incidunt
               perferendis assumenda eligendi eius praesentium!
             </div>
             <div className="status-icons">
@@ -81,17 +73,13 @@ const Chat = () => {
           </div>
           <div className="message">
             <div className="avatar">
-              <img
-                className="avatar-img"
-                src="/avatar.png"
-                alt="User Avatar"
-              />
+              <img className="avatar-img" src="/avatar.png" alt="User Avatar" />
             </div>
             <div className="message-content">
               <span className="username">User:</span>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae,
-              nostrum. Commodi quisquam fugiat unde tempora debitis vero ab
-              minus! Deleniti, expedita quos tenetur officiis incidunt
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Molestiae, nostrum. Commodi quisquam fugiat unde tempora debitis
+              vero ab minus! Deleniti, expedita quos tenetur officiis incidunt
               perferendis assumenda eligendi eius praesentium!
             </div>
             <div className="status-icons">
@@ -100,11 +88,7 @@ const Chat = () => {
           </div>
           <div className="message">
             <div className="avatar">
-              <img
-                className="avatar-img"
-                src="/avatar.png"
-                alt="User Avatar"
-              />
+              <img className="avatar-img" src="/avatar.png" alt="User Avatar" />
             </div>
             <div className="message-content">
               <span className="username">Papich:</span>
@@ -116,11 +100,7 @@ const Chat = () => {
           </div>
           <div className="message">
             <div className="avatar">
-              <img
-                className="avatar-img"
-                src="/avatar.png"
-                alt="User Avatar"
-              />
+              <img className="avatar-img" src="/avatar.png" alt="User Avatar" />
             </div>
             <div className="message-content">
               <span className="username">GooSha:</span>
@@ -132,12 +112,15 @@ const Chat = () => {
           </div>
         </div>
         <div className="user-input">
-          <input type="text" id="user-message" placeholder="Type your message..." />
+          <input
+            type="text"
+            id="user-message"
+            placeholder="Type your message..."
+          />
           <button id="send-button">Send</button>
         </div>
       </div>
     </>
-
   );
 };
 
