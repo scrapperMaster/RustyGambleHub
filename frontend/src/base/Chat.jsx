@@ -115,7 +115,7 @@ const Chat = () => {
           <input
             type="text"
             id="user-message"
-            placeholder="Type your message..."
+            placeholder="Введите сообщение"
           />
           <button id="send-button">Send</button>
         </div>

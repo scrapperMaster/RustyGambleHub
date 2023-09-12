@@ -74,8 +74,8 @@ MIDDLEWARE = [
     'debug_toolbar.middleware.DebugToolbarMiddleware'
 ]
 
-FRONTEND_URL="https://1cef-95-174-127-174.ngrok-free.app"
-BACKEND_URL="https://e98e-95-174-127-174.ngrok-free.app"
+FRONTEND_URL="https://0e32-95-174-127-174.ngrok-free.app"
+BACKEND_URL="https://1f14-95-174-127-174.ngrok-free.app"
 
 CORS_ALLOWED_ORIGINS = [
     # 'http://localhost:3000',

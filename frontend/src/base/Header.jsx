@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import SteamLogin from "../SteamLoginButton";
 import SteamLoginButton from "./SteamLoginButton";
 import { Link } from "react-router-dom";
 import Chat from "./Chat";

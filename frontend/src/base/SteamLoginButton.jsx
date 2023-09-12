@@ -2,12 +2,12 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import UserPage from "../UserPage";
 import SteamInventory from "../SteamInventory";
-
+import "./SteamLoginButton.scss";
+import { Link } from "react-router-dom";
 const SteamLoginButton = () => {
-  const url = "https://b0b6-185-244-215-54.ngrok-free.app"; //backend
+  const url = "https://1f14-95-174-127-174.ngrok-free.app"; //backend
   const [user, setUser] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false); // Добавляем состояние isLoggedIn
-
   // Функция для проверки авторизации пользователя
   const checkLoginStatus = () => {
     axios
@@ -30,10 +30,6 @@ const SteamLoginButton = () => {
     checkLoginStatus();
   }, []);
 
-  const handleLogin = () => {
-    window.location.href = `${url}/api/steam_login/`;
-  };
-
   return (
     <>
       {isLoggedIn ? ( // Проверяем значение isLoggedIn
@@ -42,7 +38,9 @@ const SteamLoginButton = () => {
           <UserPage user={user.user_data} />
         </>
       ) : (
-        <button onClick={handleLogin}>Login</button>
+        <Link to={`${url}/api/steam_login/`}>
+          <button className="login__btn">Login</button>
+        </Link>
       )}
 
       <div>

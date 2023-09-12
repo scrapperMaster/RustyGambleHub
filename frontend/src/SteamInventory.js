@@ -7,7 +7,7 @@ const SteamInventory = () => {
   const fetchSteamInventory = async () => {
     try {
       const response = await axios.get(
-        "https://b0b6-185-244-215-54.ngrok-free.app/api/get_inventory_items/",
+        "https://1f14-95-174-127-174.ngrok-free.app/api/get_inventory_items/",
         {
           withCredentials: true, // Передача кук в запросе
         }
