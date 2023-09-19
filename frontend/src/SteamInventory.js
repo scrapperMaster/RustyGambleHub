@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-
+import { REACT_APP_BACKEND_URL } from "./.env";
 const SteamInventory = () => {
   const [items, setItems] = useState([]);
 
   const fetchSteamInventory = async () => {
     try {
       const response = await axios.get(
-        "https://1f14-95-174-127-174.ngrok-free.app/api/get_inventory_items/",
+        `${process.env.REACT_APP_BACKEND_URL}/api/get_inventory_items/`,
         {
           withCredentials: true, // Передача кук в запросе
         }

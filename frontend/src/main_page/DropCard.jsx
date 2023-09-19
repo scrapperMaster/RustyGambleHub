@@ -4,7 +4,7 @@ import DropBg from "./../assets/background/drop.png";
 const DropCard = () => {
   return (
     <div class="drop-card">
-      <img className="drop-card-bg-img" src={DropBg}></img>
+      <img className="drop-card-bg-img" src={Drop}></img>
       <div className="card-title">Drop</div>
       <div className="card-center">
         1000<br></br>

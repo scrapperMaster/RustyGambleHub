@@ -13,7 +13,7 @@ from main.models import UserProfile
 
 STEAM_API_KEY = 'DABF63EF1F7B869BF6D51A4014AE2FF4'  # Замените на свой Steam API ключ
 STEAM_LOGIN_URL = 'https://steamcommunity.com/openid/login'
-RETURN_TO_URL = 'https://b0b6-185-244-215-54.ngrok-free.app/api/processlogin'
+RETURN_TO_URL = 'https://7485-95-174-127-174.ngrok-free.app'
 
 
 def steam_login(request):

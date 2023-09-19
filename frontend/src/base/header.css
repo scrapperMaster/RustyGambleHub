@@ -132,7 +132,6 @@ nav ul li a:hover {
     height: 100vh;
     display: flex;
     flex-direction: column;
-
     transform: translateX(0px);
     transition: all 0.15s;
     box-shadow: -2px 0px 10px rgba(255, 255, 255, 0.142);

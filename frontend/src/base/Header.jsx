@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import SteamLoginButton from "./SteamLoginButton";
 import { Link } from "react-router-dom";
 import Chat from "./Chat";
-const Header = () => {
+const Header = ({ setProfile, profile }) => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
@@ -73,7 +73,7 @@ const Header = () => {
                 <a className="discord-button" href="#">
                   Discord
                 </a>
-                <SteamLoginButton />{" "}
+                <SteamLoginButton setProfile={setProfile} profile={profile} />{" "}
                 {/* Вставляем компонент SteamLoginButton */}
                 <button
                   className={`close-sidebar ${
@@ -110,7 +110,8 @@ const Header = () => {
               <Link className="discord-button" to="#" target="_blank">
                 Discord
               </Link>
-              <SteamLoginButton /> {/* Вставляем компонент SteamLoginButton */}
+              <SteamLoginButton setProfile={setProfile} profile={profile} />{" "}
+              {/* Вставляем компонент SteamLoginButton */}
             </div>
           </>
         )}

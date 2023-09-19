@@ -4,8 +4,10 @@ import UserPage from "../UserPage";
 import SteamInventory from "../SteamInventory";
 import "./SteamLoginButton.scss";
 import { Link } from "react-router-dom";
-const SteamLoginButton = () => {
-  const url = "https://1f14-95-174-127-174.ngrok-free.app"; //backend
+import { REACT_APP_BACKEND_URL } from "./../.env";
+import UserInfo from "../components/userInfo/UserInfo";
+const SteamLoginButton = ({ setProfile, profile }) => {
+  const url = process.env.REACT_APP_BACKEND_URL; //backend
   const [user, setUser] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false); // Добавляем состояние isLoggedIn
   // Функция для проверки авторизации пользователя
@@ -14,6 +16,7 @@ const SteamLoginButton = () => {
       .get(`${url}/api/user_data/`, { withCredentials: true })
       .then((response) => {
         if (response.data.user_data) {
+          console.log("Авторизован");
           setUser(response.data);
           setIsLoggedIn(true); // Устанавливаем значение true, если пользователь авторизован
         } else {
@@ -38,11 +41,13 @@ const SteamLoginButton = () => {
           <UserPage user={user.user_data} />
         </>
       ) : (
-        <Link to={`${url}/api/steam_login/`}>
-          <button className="login__btn">Login</button>
-        </Link>
+        // <Link to={`${url}/api/steam_login/`}>
+        //   <button className="login__btn">Login</button>
+        // </Link>
+        <button className="login__btn" onClick={() => setProfile(!profile)}>
+          Login
+        </button>
       )}
-
       <div>
         {/* Данные пользователя будут отображаться автоматически, если пользователь авторизован */}
       </div>

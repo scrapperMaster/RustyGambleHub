@@ -7,6 +7,8 @@
   position: fixed;
   background-color: rgb(16, 16, 16);
   transition: transform 0.3s ease-in-out; /* Added transition property */
+  left: 0;
+  top: 0;
 }
 
 .chat-hidden {
